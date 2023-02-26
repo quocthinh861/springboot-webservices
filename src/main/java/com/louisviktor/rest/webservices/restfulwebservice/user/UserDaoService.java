@@ -18,4 +18,16 @@ public class UserDaoService {
     public List<User> findAll() {
         return users;
     }
+
+    public User findOne(int id) {
+        return users.stream().filter(user -> user.getId() == id).findFirst().orElse(null);
+    }
+
+    public User save(User user) {
+        if (user.getId() == null) {
+            user.setId(users.size() + 1);
+        }
+        users.add(user);
+        return user;
+    }
 }
